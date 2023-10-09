@@ -1,0 +1,31 @@
+#platformId{
+    margin: 0;
+    padding: 0;
+}
+
+/* Plaform Page Styling */
+
+img-container{
+    width: 100% !important;
+}
+
+.select-platform{
+    position: absolute;
+}
+
+.platform-img{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.plat-img{
+   object-fit: contain;
+   width: 49.45vw;
+   z-index: -1;
+   height: 100vh;
+} 
+
+.platform-text{
+    z-index: 1;
+}
