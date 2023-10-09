@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import intelCPU, intelMotherboard, amdCPU, amdMotherboard, cooler, ram, storage, gpu, psu, case
+from .models import intelCPU, intelMotherboard, amdCPU, amdMotherboard, cooler, ram, storage, gpu, psu, case, customers
 
 class intelCPUSerializer(serializers.ModelSerializer):
     class Meta:
@@ -50,3 +50,8 @@ class caseSerializer(serializers.ModelSerializer):
     class Meta:
         model = case
         fields = ('id', 'wattage', 'name', 'price', 'description', 'image')
+
+class customersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = customers
+        fields = ('email', 'password', 'name')

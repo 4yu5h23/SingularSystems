@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.db import models
 
 class intelCPU(models.Model):
     id=models.CharField(max_length=50,primary_key=True)
@@ -109,6 +107,14 @@ class case(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='static/images/', blank=True)
     
+    def __str__(self):
+        return self.name
+    
+class customers(models.Model):
+    email=models.CharField(max_length=50,primary_key=True)
+    password=models.CharField(max_length=50)
+    name=models.CharField(max_length=50)
+
     def __str__(self):
         return self.name
     

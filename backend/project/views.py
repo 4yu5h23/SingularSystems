@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .serializers import intelCPUSerializer, intelMotherboardSerializer, amdCPUSerializer, amdMotherboardSerializer, coolerSerializer, ramSerializer, storageSerializer, gpuSerializer, psuSerializer, caseSerializer
+from .serializers import intelCPUSerializer, intelMotherboardSerializer, amdCPUSerializer, amdMotherboardSerializer, coolerSerializer, ramSerializer, storageSerializer, gpuSerializer, psuSerializer, caseSerializer, customersSerializer
 from rest_framework import viewsets  
-from .models import intelCPU, intelMotherboard, amdCPU, amdMotherboard, cooler, ram, storage, gpu, psu, case
+from .models import intelCPU, intelMotherboard, amdCPU, amdMotherboard, cooler, ram, storage, gpu, psu, case,customers
 
 class intelCPUView(viewsets.ModelViewSet):
     serializer_class = intelCPUSerializer
@@ -42,3 +42,8 @@ class psuView(viewsets.ModelViewSet):
 class caseView(viewsets.ModelViewSet):
     serializer_class = caseSerializer
     queryset = case.objects.all()
+
+# class customersView(viewsets.ModelViewSet):
+#     serializer_class = customersSerializer
+#     queryset = customers.objects.all()
+
