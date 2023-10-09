@@ -42,4 +42,3 @@ class psuView(viewsets.ModelViewSet):
 class caseView(viewsets.ModelViewSet):
     serializer_class = caseSerializer
     queryset = case.objects.all()
-

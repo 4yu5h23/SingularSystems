@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import intelCPU, intelMotherboard, amdCPU, amdMotherboard, cooler, ram, storage, gpu, psu, case
 
+
 admin.site.register(intelCPU)
 admin.site.register(intelMotherboard)
 admin.site.register(amdCPU)
