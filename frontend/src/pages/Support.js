@@ -1,7 +1,24 @@
 import React from 'react'
 import './Support.css'
+import { useState } from 'react';
 
 function Support() {
+  
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    email_address: '',
+    phone_number: '',
+    subject: '',
+    message: ''
+});
+
+  const [feedback, setFeedback] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({ ...prevData, [name]: value }));
+  };
 
     const submitForm = async (formData) => {
       try {
@@ -14,12 +31,19 @@ function Support() {
           });
   
           if (response.ok) {
-              console.log("Form submitted successfully");
-              // Optionally reset the form or show a success message to the user
-          } else {
-              console.error("Failed to submit the form");
-              // Handle errors, maybe show an error message to the user
-          }
+            setFeedback("Form submitted successfully");
+            setFormData({
+                first_name: '',
+                last_name: '',
+                email_address: '',
+                phone_number: '',
+                subject: '',
+                message: ''
+            });
+        } else {
+            setFeedback("Failed to submit the form");
+        }
+        
       } catch (error) {
           console.error("There was an error submitting the form", error);
       }
@@ -28,16 +52,16 @@ function Support() {
     const handleSubmit = (event) => {
       event.preventDefault();
   
-      const formData = {
-          first_name: event.target.first_name.value,
-          last_name: event.target.last_name.value,
-          email_address: event.target.email_address.value,
-          phone_number: event.target.phone_number.value, 
-          subject: event.target.subject.value,
-          message: event.target.message.value
-      };
+      const newFormData = {
+        first_name: formData.first_name,
+        last_name: formData.last_name,
+        email_address: formData.email_address,
+        phone_number: formData.phone_number,
+        subject: formData.subject,
+        message: formData.message
+    };    
   
-      submitForm(formData);
+      submitForm(newFormData);
     }
 
     return (
@@ -53,7 +77,7 @@ function Support() {
           <p className='warranty-para'>The warranty does not cover damage caused by misuse, accidents, or natural disasters.
             If a certain part warranty does offer free replacement for any of the reasons that our warranty does not cover, we will replace the part free of cost, but service charges may apply.</p>
         </div>
-        <div classNameName="support-element container-fluid" id="contact">
+        <div className="support-element container-fluid" id="contact">
           <h1>Contact Us</h1>
           
           <form onSubmit={handleSubmit}>
@@ -61,13 +85,27 @@ function Support() {
               <div class="col">
                 <div class="form-outline">
                   <label class="form-label" for="first_name">First name</label>
-                  <input type="text" id="first_name" class="form-control" />
+                  <input 
+                      type="text" 
+                      id="first_name" 
+                      name="first_name" 
+                      value={formData.first_name} 
+                      onChange={handleChange} 
+                      className="form-control" />
                 </div>
               </div>
               <div class="col">
                 <div class="form-outline">
                   <label class="form-label" for="last_name">Last name</label>
-                  <input type="text" id="last_name" class="form-control" />
+                  <input 
+    type="text" 
+    id="last_name" 
+    name="last_name" 
+    value={formData.last_name} 
+    onChange={handleChange} 
+    className="form-control" 
+/>
+
                 </div>
               </div>
             </div>
@@ -77,14 +115,30 @@ function Support() {
               <div className="col">
                 <div class="form-outline mb-4">
                   <label class="form-label" for="email_address">Email address</label>
-                  <input type="email" id="email_address" class="form-control" />
+                  <input 
+    type="email" 
+    id="email_address" 
+    name="email_address" 
+    value={formData.email_address} 
+    onChange={handleChange} 
+    className="form-control" 
+/>
+
                 </div>
               </div>
               {/* Phone input  */}
               <div className="col">
                 <div class="form-outline mb-4">
                   <label class="form-label" for="phone_number">Phone Number</label>
-                  <input type="number" id="phone_number" class="form-control" />
+                  <input 
+    type="number" 
+    id="phone_number" 
+    name="phone_number" 
+    value={formData.phone_number} 
+    onChange={handleChange} 
+    className="form-control" 
+/>
+
                 </div>
               </div>
             </div>
@@ -92,18 +146,35 @@ function Support() {
             {/* Subject input  */}
             <div class="form-outline mb-4">
               <label class="form-label" for="subject">Subject</label>
-              <input type="text" id="subject" class="form-control" />
+              <input 
+    type="text" 
+    id="subject" 
+    name="subject" 
+    value={formData.subject} 
+    onChange={handleChange} 
+    className="form-control" 
+/>
+
             </div>
   
             {/* Description input  */}
             <div class="form-outline mb-4">
               <label class="form-label" for="message">Message</label>
-              <textarea class="form-control" id="message" rows="4"></textarea>
+              <textarea 
+    id="message" 
+    name="message" 
+    value={formData.message} 
+    onChange={handleChange} 
+    className="form-control" 
+    rows="4">
+</textarea>
+
             </div>
   
             {/* <!-- Submit button --> */}
             <button type="submit" class="btn btn-block mb-4" >Submit</button>
           </form>
+          <div>{feedback}</div>
         </div>
       </div>
     )
