@@ -108,5 +108,3 @@ function Support() {
       </div>
     )
 }
-
-export default Support
