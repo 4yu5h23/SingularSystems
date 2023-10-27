@@ -34,13 +34,34 @@
 
 import React, { Component } from 'react'
 import './SignUp.css'
+import axios from 'axios';
+
 
 export default class SignUp extends Component {
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const data = {
+        email: document.getElementById('signUp_email').value,
+        password: document.getElementById('signUp_password').value,
+        first_name: document.getElementById('signUp_firstName').value,
+        last_name: document.getElementById('lastName').value
+    };
+
+    axios.post('http://localhost:8000/accounts/signup/', data)
+        .then(res => {
+            alert('Signup successful!');
+        })
+        .catch(err => {
+            alert('Error signing up!');
+        });
+}
+
   render() {
     return (
       <div className="container">
       <div className="container inner_container my-5">
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <h3>Sign Up</h3>
 
         <div className="mb-3">

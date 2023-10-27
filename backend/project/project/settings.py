@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'warranty',
     'rest_framework',
     'app0',
+    'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -138,3 +139,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"static")
 ]
+
+AUTH_USER_MODEL = 'accounts.UserAccount'
