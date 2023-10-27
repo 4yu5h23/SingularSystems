@@ -41,7 +41,7 @@ function Support() {
                 message: ''
             });
         } else {
-            setFeedback("Failed to submit the form");
+            setFeedback("Please Fill the form correctly");
         }
         
       } catch (error) {

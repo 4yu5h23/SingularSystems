@@ -13,6 +13,7 @@ import Forge from './pages/Forge'
 import Veteran from './pages/Veteran'
 import Elite from './pages/Elite'
 import Rendero from './pages/Rendero'
+import Try from './pages/try';
 // import Cart from'./components/Cart'
 // import Footer from './components/Footer'
 
@@ -28,7 +29,7 @@ function App() {
       <Route exact path="/" element={<Home/>} />
       <Route exact path="/platform" element={<Platform />} />
       <Route exact path="/intel" element={<IntelCPU />} />
-      <Route exact path="/pre-built" element={<PreBuilt />} />
+      <Route exact path="/prebuilts" element={<PreBuilt />} />
       <Route exact path="/support" element={<Support />} />
       <Route exact path="/login" element={<Login />} />
       <Route exact path="/signup" element={<SignUp />} />
@@ -36,6 +37,7 @@ function App() {
       <Route exact path="/veteran" element={<Veteran />} />
       <Route exact path="/elite" element={<Elite />} />
       <Route exact path="/rendero" element={<Rendero />} />
+      <Route exact path="/try" element={<Try />} />
 
       </Routes>
       {/* <Footer /> */}

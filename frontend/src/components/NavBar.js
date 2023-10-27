@@ -18,13 +18,13 @@ export default function NavBar() {
                                     <a className="nav-link" aria-current="page" href="/platform">Custom PC's</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/pre-built">Pre-Builts</a>
+                                    <a className="nav-link" href="/prebuilts">Pre-Builts</a>
                                 </li>
                                 {/* <li className="nav-item">
                                     <a className="nav-link" href="/workstation">Workstations</a>
                                 </li> */}
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/">About</a>
+                                    <a className="nav-link" href="/try">About</a>
                                 </li>
                                 <li className="nav-item">
                                     <a className="nav-link" href="/support">Support</a>
