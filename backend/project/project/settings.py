@@ -141,3 +141,9 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.UserAccount'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
