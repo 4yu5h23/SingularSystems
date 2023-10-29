@@ -1,7 +1,69 @@
 import React from 'react'
 import './Support.css'
+import { useState } from 'react';
 
 function Support() {
+
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    email_address: '',
+    phone_number: '',
+    subject: '',
+    message: ''
+  });
+
+  const [feedback, setFeedback] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevData => ({ ...prevData, [name]: value }));
+  };
+
+  const submitForm = async (formData) => {
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/contact_us/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        setFeedback("Form submitted successfully");
+        setFormData({
+          first_name: '',
+          last_name: '',
+          email_address: '',
+          phone_number: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        setFeedback("Please Fill the form correctly");
+      }
+
+    } catch (error) {
+      console.error("There was an error submitting the form", error);
+    }
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const newFormData = {
+      first_name: formData.first_name,
+      last_name: formData.last_name,
+      email_address: formData.email_address,
+      phone_number: formData.phone_number,
+      subject: formData.subject,
+      message: formData.message
+    };
+
+    submitForm(newFormData);
+  }
+
   return (
     <div className='container-fluid' id='supportId'>
       <div className="support-element" id='support-text'>
@@ -17,18 +79,33 @@ function Support() {
       </div>
       <div className="support-element container" id="contact">
         <h1>Contact Us</h1>
-        <form>
-          <div className="row mb-4">
-            <div className="col">
-              <div className="form-outline">
-                <label className="form-label" for="form3Example1">First name</label>
-                <input type="text" id="form3Example1" class="form-control" />
+
+        <form onSubmit={handleSubmit}>
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="first_name">First name</label>
+                <input
+                  type="text"
+                  id="first_name"
+                  name="first_name"
+                  value={formData.first_name}
+                  onChange={handleChange}
+                  className="form-control" />
               </div>
             </div>
-            <div className="col">
-              <div className="form-outline">
-                <label className="form-label" for="form3Example2">Last name</label>
-                <input type="text" id="form3Example2" class="form-control" />
+            <div class="col">
+              <div class="form-outline">
+                <label class="form-label" for="last_name">Last name</label>
+                <input
+                  type="text"
+                  id="last_name"
+                  name="last_name"
+                  value={formData.last_name}
+                  onChange={handleChange}
+                  className="form-control"
+                />
+
               </div>
             </div>
           </div>
@@ -36,41 +113,68 @@ function Support() {
           {/* <!-- Email input --> */}
           <div className="row mb-4">
             <div className="col">
-              <div className="form-outline mb-4">
-                <label className="form-label" for="form3Example3">Email address</label>
-                <input type="email" id="form3Example3" class="form-control" />
+              <div class="form-outline mb-4">
+                <label class="form-label" for="email_address">Email address</label>
+                <input
+                  type="email"
+                  id="email_address"
+                  name="email_address"
+                  value={formData.email_address}
+                  onChange={handleChange}
+                  className="form-control"
+                />
+
               </div>
             </div>
             {/* Phone input  */}
             <div className="col">
-              <div className="form-outline mb-4">
-                <label className="form-label" for="form3Example3">Phone Number</label>
-                <input type="number" id="form3Example3" class="form-control" />
+              <div class="form-outline mb-4">
+                <label class="form-label" for="phone_number">Phone Number</label>
+                <input
+                  type="number"
+                  id="phone_number"
+                  name="phone_number"
+                  value={formData.phone_number}
+                  onChange={handleChange}
+                  className="form-control"
+                />
+
               </div>
             </div>
           </div>
 
-          {/* <!-- Password input --> */}
-          {/* <div className="form-outline mb-4">
-            <label className="form-label" for="form3Example4">Residential Address</label>
-            <input type="text" id="form3Example4" class="form-control" />
-          </div> */}
-
           {/* Subject input  */}
-          <div className="form-outline mb-4">
-            <label className="form-label" for="form3Example4">Subject</label>
-            <input type="text" id="form3Example4" class="form-control" />
+          <div class="form-outline mb-4">
+            <label class="form-label" for="subject">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              value={formData.subject}
+              onChange={handleChange}
+              className="form-control"
+            />
+
           </div>
 
           {/* Description input  */}
-          <div className="form-outline mb-4">
-            <label className="form-label" for="form4Example3">Description</label>
-            <textarea className="form-control" id="form4Example3" rows="4"></textarea>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              className="form-control"
+              rows="4">
+            </textarea>
+
           </div>
 
           {/* <!-- Submit button --> */}
-          <button type="submit" className="btn btn-block mb-4">Submit</button>
+          <button type="submit" class="btn btn-block mb-4" >Submit</button>
         </form>
+        <div>{feedback}</div>
       </div>
     </div>
   )

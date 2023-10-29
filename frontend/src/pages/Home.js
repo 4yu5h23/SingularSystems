@@ -13,7 +13,7 @@ export default function Home() {
         <a href="/platform"><img src="/images/homeimg-2.png" alt="not" /></a>
       </div>
       <div className='home-element bg-image'id='home-element-3'>
-        <a href="/pre-built"><img src="/images/homeimg-3.png" alt="not" /></a>
+        <a href="/prebuilts"><img src="/images/homeimg-3.png" alt="not" /></a>
       </div>
     </div>
     </>

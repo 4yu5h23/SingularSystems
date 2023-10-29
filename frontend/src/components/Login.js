@@ -1,64 +1,76 @@
-// import React from 'react';
-// import './Login.css'
-
-
-// function Login() {
-//     return (
-//         <div className="container">
-
-            
-// <div className="container form my-5">
-//   <div className="form__box">
-//     <div className="form__left">
-//       <div className="form__padding"><img class="form__image" src="https://i.pinimg.com/736x/74/bd/bd/74bdbd42fabc616a1837e4854329618f.jpg"/></div>
-//     </div>
-//     <div className="form__right">
-//       <div className="form__padding-right">
-//         <form>
-//           <h1 className="form__title">Member Login</h1>
-//           <input className="form__email" type="text" placeholder="Email"/>
-//           <input className="form__password" type="text" placeholder="******"/>
-//           <input className="form__submit-btn" type="submit" value="Login"/>
-//         </form><span>Forgot<a className="form__link" href="#">Username</a><a>/</a><a class="form__link" href="#">Password</a></span>
-//         <p> <a className="form__link" href="Login">Create your account</a></p>
-//       </div>
-//     </div>
-//   </div>
-// </div>
-//         </div>
-
-//     );
-// }
-
-// export default Login;
-
 import React, { Component } from 'react'
 import './Login.css'
+import axios from 'axios'
+
 
 export default class Login extends Component {
+  state = {
+    email: '',
+    password: '',
+    errors: {} ,
+    message: ''
+  }
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    const { email, password } = this.state;
+  
+    try {
+      const response = await axios.post('http://localhost:8000/accounts/login/', {
+        email,
+        password
+      });
+  
+      if (response && response.data) { 
+        console.log(response.data); 
+        localStorage.setItem('access_token', response.data.access);
+        localStorage.setItem('refresh_token', response.data.refresh);
+        this.props.setAuthState(true);
+        this.setState({ message: "Login successful!" });
+      } else {
+        console.error("The response or response data is not defined.");
+      }
+  
+    } catch (error) {
+      console.error('Login error:', error.response ? error.response : error);
+      this.setState({ errors: error.response ? error.response.data : {}, message: "Login failed!"  });
+    }
+}
+
+  
   render() {
     return (
       <div className="container">
       <div className="container inner_container my-5">
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <h3>Login</h3>
+        {this.state.message && <div>{this.state.message}</div>}
 
         <div className="mb-3">
           <label>Email address</label>
           <input
             type="email"
-            className="form-control" id='login_email'
+            value={this.state.email}  // bind value to state
+            onChange={e => this.setState({ email: e.target.value })}  // update state on change
+            className="form-control" 
+            id='login_email'
             placeholder="Enter email"
           />
+
         </div>
 
         <div className="mb-3">
           <label>Password</label>
           <input
             type="password"
-            className="form-control" id='login_password'
+            value={this.state.password}  // bind value to state
+            onChange={e => this.setState({ password: e.target.value })}  // update state on change
+            className="form-control" 
+            id='login_password'
             placeholder="Enter password"
           />
+
         </div>
 
         <div className="d-grid">
