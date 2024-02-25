@@ -4,6 +4,7 @@ from django.urls import path,include
 from rest_framework import routers
 from app0 import views
 from warranty import views as views2
+from accounts import views as views3
 
 
 admin.site.site_header = "SingularSystems Admin"
@@ -24,7 +25,6 @@ router.register(r'psu', views.psuView, 'psu')
 router.register(r'case', views.caseView, 'case')
 
 router.register(r'contact_us', views2.contact_usView, 'contact_us')
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
