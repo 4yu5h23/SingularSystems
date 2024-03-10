@@ -44,3 +44,7 @@
     color: white;
     text-align: center;
 }
+
+#contact div {
+    justify-content: center;
+}
